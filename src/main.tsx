@@ -10,19 +10,19 @@ import Login from "./routes/Login/index.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/",
     element: <App />,
     errorElement: <Error />,
     children: [
-      { path: "/login", element: <Login /> },
+      { path: "/", element: <Login /> },
       { path: "/cadastro", element: <Cadastro /> },
       { path: "/home", element: <Home /> },
     ],
   },
 ]);
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
-);
+    <RouterProvider router={router}/>
+  </StrictMode>,
+)
