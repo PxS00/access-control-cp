@@ -1,6 +1,7 @@
+import type { FieldValues } from "react-hook-form";
 import type { InputProps } from "../../types/inputProps";
 
-export default function Input({
+export default function Input<T extends FieldValues = FieldValues>({
   id,
   name,
   label,
@@ -8,7 +9,7 @@ export default function Input({
   placeholder,
   register,
   error,
-}: InputProps) {
+}: InputProps<T>) {
   return (
     <div>
       <label htmlFor={id}>{label}</label>
