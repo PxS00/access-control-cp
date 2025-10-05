@@ -1,11 +1,11 @@
-import type { FieldValues } from "react-hook-form";
-import type { InputProps } from "../../types/inputProps";
+import type { FieldValues } from 'react-hook-form';
+import type { InputProps } from '../../types/inputProps';
 
 export default function Input<T extends FieldValues = FieldValues>({
   id,
   name,
   label,
-  type = "text",
+  type = 'text',
   placeholder,
   register,
   error,

@@ -1,5 +1,5 @@
 export default function Home() {
-  const usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+  const usuario = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
 
   return (
     <div>

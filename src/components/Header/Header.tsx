@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import type { CadastroSchema } from "../../types/schema";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import type { CadastroSchema } from '../../types/schema';
 
 export default function Header() {
   const navigate = useNavigate();
   const [usuario, setUsuario] = useState<CadastroSchema | null>(null);
 
   function logout() {
-    localStorage.removeItem("usuarioLogado");
-    window.dispatchEvent(new Event("userChanged"));
-    navigate("/");
+    localStorage.removeItem('usuarioLogado');
+    window.dispatchEvent(new Event('userChanged'));
+    navigate('/');
   }
 
   useEffect(() => {
     const getUsuario = () => {
       try {
-        return JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+        return JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
       } catch {
         return null;
       }
@@ -27,10 +27,10 @@ export default function Header() {
       setUsuario(getUsuario());
     };
 
-    window.addEventListener("userChanged", handleUserChange);
+    window.addEventListener('userChanged', handleUserChange);
 
     return () => {
-      window.removeEventListener("userChanged", handleUserChange);
+      window.removeEventListener('userChanged', handleUserChange);
     };
   }, []);
 

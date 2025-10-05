@@ -1,14 +1,14 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../components/Form/Button";
-import Input from "../../components/Form/Input";
-import { LayoutForm } from "../../components/Form/LayoutForm";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '../../components/Form/Button';
+import Input from '../../components/Form/Input';
+import { LayoutForm } from '../../components/Form/LayoutForm';
 import {
   loginSchema,
   type CadastroSchema,
   type LoginSchema,
-} from "../../types/schema";
+} from '../../types/schema';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,38 +19,37 @@ export default function Login() {
     formState: { errors, isSubmitting, isValid },
     setError,
   } = useForm<LoginSchema>({
-    mode: "onChange",
+    mode: 'onChange',
     resolver: zodResolver(loginSchema),
   });
 
   async function onSubmit(data: LoginSchema) {
     try {
-      const res = await fetch("http://localhost:3001/usuarios");
+      const res = await fetch('http://localhost:3001/usuarios');
       const usuarios: CadastroSchema[] = await res.json();
       const usuarioValido = usuarios.find(
-        (u) => u.nomeUsuario === data.nomeUsuario && u.email === data.email
+        u => u.nomeUsuario === data.nomeUsuario && u.email === data.email
       );
       if (!usuarioValido) {
-        setError("email", {
-          type: "manual",
-          message: "Usuário ou e-mail inválido",
+        setError('email', {
+          type: 'manual',
+          message: 'Usuário ou e-mail inválido',
         });
         return;
       }
-      localStorage.setItem("usuarioLogado", JSON.stringify(usuarioValido));
-      window.dispatchEvent(new Event("userChanged"));
-      navigate("/home");
+      localStorage.setItem('usuarioLogado', JSON.stringify(usuarioValido));
+      window.dispatchEvent(new Event('userChanged'));
+      navigate('/home');
     } catch {
-      setError("email", {
-        type: "manual",
-        message: "Erro ao acessar os dados do servidor.",
+      setError('email', {
+        type: 'manual',
+        message: 'Erro ao acessar os dados do servidor.',
       });
     }
   }
 
   return (
-<main className="bg-log-cad page-login">
-
+    <main className="bg-log-cad page-login">
       <div className="container">
         <LayoutForm title="Login">
           <form onSubmit={handleSubmit(onSubmit)}>

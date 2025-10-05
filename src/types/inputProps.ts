@@ -1,4 +1,4 @@
-import type { FieldValues, Path, UseFormRegister } from "react-hook-form";
+import type { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
 /**
  * Props para o componente Input genérico compatível com React Hook Form

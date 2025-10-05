@@ -1,10 +1,10 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/Form/Button";
-import Input from "../../components/Form/Input";
-import { LayoutForm } from "../../components/Form/LayoutForm";
-import { cadastroSchema, type CadastroSchema } from "../../types/schema";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../components/Form/Button';
+import Input from '../../components/Form/Input';
+import { LayoutForm } from '../../components/Form/LayoutForm';
+import { cadastroSchema, type CadastroSchema } from '../../types/schema';
 const API_URL = import.meta.env.VITE_API_URL as string;
 
 export default function Cadastro() {
@@ -17,8 +17,8 @@ export default function Cadastro() {
     setError,
     reset,
   } = useForm<CadastroSchema>({
-    mode: "onChange",
-    defaultValues: { nome: "", nomeUsuario: "", email: "" },
+    mode: 'onChange',
+    defaultValues: { nome: '', nomeUsuario: '', email: '' },
     resolver: zodResolver(cadastroSchema),
   });
 
@@ -33,31 +33,31 @@ export default function Cadastro() {
         (u: CadastroSchema) => u.email === data.email
       );
       if (nomeUsuarioExistente) {
-        setError("nomeUsuario", {
-          type: "manual",
-          message: "Nome de usuário já cadastrado.",
+        setError('nomeUsuario', {
+          type: 'manual',
+          message: 'Nome de usuário já cadastrado.',
         });
         return;
       }
       if (emailExistente) {
-        setError("email", { type: "manual", message: "E-mail já cadastrado." });
+        setError('email', { type: 'manual', message: 'E-mail já cadastrado.' });
         return;
       }
-      
+
       const resposta = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!resposta.ok) throw new Error("Erro ao salvar usuário");
+      if (!resposta.ok) throw new Error('Erro ao salvar usuário');
       reset();
-      window.dispatchEvent(new Event("userChanged"));
-      navigate("/");
+      window.dispatchEvent(new Event('userChanged'));
+      navigate('/');
     } catch {
-      setError("email", { type: "manual", message: "Erro ao salvar usuário." });
+      setError('email', { type: 'manual', message: 'Erro ao salvar usuário.' });
     }
   });
-  
+
   return (
     <main className="bg-log-cad page-login">
       <div className="container">
