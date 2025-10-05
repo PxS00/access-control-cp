@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import type { IUserFormValues } from "../../types/inputProps";
+import { Button } from "../../components/Form/Button";
 import Input from "../../components/Form/Input";
-
-const API_URL = "http://localhost:3001/usuarios";
+import { LayoutForm } from "../../components/Form/LayoutForm";
+import { type CadastroSchema } from "../../types/schema";
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 export default function Cadastro() {
   const navigate = useNavigate();
@@ -11,12 +12,12 @@ export default function Cadastro() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<IUserFormValues>({
-    mode: "onChange",
+    formState: { errors, isSubmitting },
+  } = useForm<CadastroSchema>({
+    mode: "onChange", 
   });
 
-  const onSubmit = handleSubmit(async (data: IUserFormValues) => {
+  const onSubmit = handleSubmit(async (data: CadastroSchema) => {
     try {
       const resposta = await fetch(API_URL, {
         method: "POST",
@@ -37,46 +38,45 @@ export default function Cadastro() {
       alert("Erro ao salvar usuário.");
     }
   });
-
   return (
     <main>
       <div>
-        <h1>Cadastro de Usuário</h1>
-
-        <form onSubmit={onSubmit}>
-          <fieldset>
+        <LayoutForm title="Cadastro de Usuário">
+          <form onSubmit={onSubmit}>
             <Input
               id="nome"
-              name={"nome"}
+              name="nome"
               label="Nome"
               placeholder="Digite seu nome completo"
               register={register}
-              error={errors.nome && "Campo obrigatório"}
+              error={errors.nome?.message}
             />
-
             <Input
               id="nomeUsuario"
-              name={"nomeUsuario"}
+              name="nomeUsuario"
               label="Nome de Usuário"
               placeholder="Digite seu nome de usuário"
               register={register}
-              error={errors.nomeUsuario && "Campo obrigatório"}
+              error={errors.nomeUsuario?.message}
             />
-
             <Input
               id="email"
-              name={"email"}
+              name="email"
               label="E-mail"
+              type="email"
               placeholder="Digite seu e-mail"
               register={register}
-              error={errors.email && "Campo obrigatório"}
+              error={errors.email?.message}
             />
-
-            <div>
-              <button type="submit">Cadastrar</button>
-            </div>
-          </fieldset>
-        </form>
+            <Button
+              type="submit"
+              isLoading={isSubmitting}
+              loadingText="Cadastrando..."
+            >
+              Cadastrar
+            </Button>
+          </form>
+        </LayoutForm>
       </div>
     </main>
   );
