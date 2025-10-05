@@ -1,9 +1,10 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Form/Button";
 import Input from "../../components/Form/Input";
 import { LayoutForm } from "../../components/Form/LayoutForm";
-import { type CadastroSchema } from "../../types/schema";
+import { cadastroSchema, type CadastroSchema } from "../../types/schema";
 const API_URL = import.meta.env.VITE_API_URL as string;
 
 export default function Cadastro() {
@@ -13,31 +14,50 @@ export default function Cadastro() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setError,
+    reset,
   } = useForm<CadastroSchema>({
-    mode: "onChange", 
+    mode: "onChange",
+    defaultValues: { nome: "", nomeUsuario: "", email: "" },
+    resolver: zodResolver(cadastroSchema),
   });
 
   const onSubmit = handleSubmit(async (data: CadastroSchema) => {
     try {
+      const res = await fetch(API_URL);
+      const usuarios = await res.json();
+      const nomeUsuarioExistente = usuarios.find(
+        (u: CadastroSchema) => u.nomeUsuario === data.nomeUsuario
+      );
+      const emailExistente = usuarios.find(
+        (u: CadastroSchema) => u.email === data.email
+      );
+      if (nomeUsuarioExistente) {
+        setError("nomeUsuario", {
+          type: "manual",
+          message: "Nome de usuário já cadastrado.",
+        });
+        return;
+      }
+      if (emailExistente) {
+        setError("email", { type: "manual", message: "E-mail já cadastrado." });
+        return;
+      }
+      
       const resposta = await fetch(API_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
-      if (!resposta.ok) {
-        throw new Error("Erro ao salvar usuário");
-      }
-
-      alert("Usuário cadastrado com sucesso!");
+      if (!resposta.ok) throw new Error("Erro ao salvar usuário");
+      reset();
+      window.dispatchEvent(new Event("userChanged"));
       navigate("/");
-    } catch (e) {
-      console.error("Erro:", e);
-      alert("Erro ao salvar usuário.");
+    } catch {
+      setError("email", { type: "manual", message: "Erro ao salvar usuário." });
     }
   });
+  
   return (
     <main>
       <div>
