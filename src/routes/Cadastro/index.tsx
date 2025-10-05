@@ -49,7 +49,7 @@ export default function Cadastro() {
         md:px-8 md:py-10
       "
     >
-      <div>
+      <div className="container">
         <h1>Cadastro de Usuário</h1>
 
         <form onSubmit={onSubmit}>
