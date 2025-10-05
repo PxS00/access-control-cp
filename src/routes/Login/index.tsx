@@ -44,29 +44,36 @@ export default function Login() {
 
 
   return (
-    <LayoutForm title="Login">
+    <main>
+      <div style={{ width: "40%", margin: "0 auto" }}>
+        <LayoutForm title="Login">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
           id="nomeUsuario"
           name="nomeUsuario"
           label="Nome de Usuário"
           placeholder="Digite seu nome de usuário"
-          register={register as any}
+          register={register}
+          error={errors.nomeUsuario?.message}
         />
 
         <Input
-          id="senha"
-          name={"senha" as any}
-          type="password"
-          label="Senha"
-          placeholder="Digite sua senha"
-          register={register as any}
+          id="email"
+          name="email"
+          type="email"
+          label="E-mail"
+          placeholder="Digite seu e-mail"
+          register={register}
+          error={errors.email?.message}
         />
+
         <Button type="submit" isLoading={isSubmitting} loadingText="Entrando...">
           Entrar
         </Button>
-      
       </form>
     </LayoutForm>
+      </div>
+    </main>
+    
   );
 }
