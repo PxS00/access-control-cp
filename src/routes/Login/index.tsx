@@ -4,14 +4,14 @@ import Input from "../../components/Form/Input";
 import type { IUserFormValues } from "../../types/inputProps";
 import { Button } from "../../components/Form/Button";
 
-type LoginData = IUserFormValues & { senha: string }; // 👈 adiciona o campo senha
-
 export default function Login() {
-  const { register, handleSubmit, formState: { isSubmitting } } = useForm<LoginData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError,
+  } = useForm<IUserFormValues>({ mode: "onBlur" });
 
-  function onSubmit(data: LoginData) {
-    console.log("Dados do login:", data);
-  }
 
   return (
     <LayoutForm title="Login">
