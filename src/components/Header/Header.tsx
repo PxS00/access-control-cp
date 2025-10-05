@@ -1,4 +1,4 @@
-export default function Cabecalho() {
+export default function Header() {
 
   return (
     <header>

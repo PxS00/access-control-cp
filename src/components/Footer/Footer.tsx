@@ -1,5 +1,4 @@
-// src/components/Rodape/index.tsx
-export default function Rodape() {
+export default function Footer() {
   return (
     <footer>
       <p>
