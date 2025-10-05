@@ -67,9 +67,12 @@ export default function Login() {
               register={register}
               error={errors.email?.message}
             />
-
             <Button type="submit" isLoading={isSubmitting} loadingText="Entrando...">
               Entrar
+            </Button>
+            
+            <Button type="submit">
+              Quero me cadastrar
             </Button>
           </form>
         </LayoutForm>

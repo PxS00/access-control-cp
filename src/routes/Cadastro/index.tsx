@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import type { IUserFormValues } from "../../types/inputProps";
 import Input from "../../components/Form/Input";
+import { LayoutForm } from "../../components/Form/LayoutForm";
+import { Button } from "../../components/Form/Button";
 
 const API_URL = "http://localhost:3001/usuarios";
 
@@ -39,21 +41,10 @@ export default function Cadastro() {
   });
 
   return (
-    <main
-      className="
-        bg-log-cad bg-cover bg-center bg-no-repeat
-        min-h-dvh w-full relative
-        flex items-center justify-center
-        px-4 py-6
-        sm:px-6 sm:py-8
-        md:px-8 md:py-10
-      "
-    >
+    <main className="bg-log-cad page-login">
       <div className="container">
-        <h1>Cadastro de Usuário</h1>
-
-        <form onSubmit={onSubmit}>
-          <fieldset>
+        <LayoutForm title="Cadastro">
+          <form onSubmit={onSubmit}>
             <Input
               id="nome"
               name={"nome"}
@@ -62,7 +53,6 @@ export default function Cadastro() {
               register={register}
               error={errors.nome && "Campo obrigatório"}
             />
-
             <Input
               id="nomeUsuario"
               name={"nomeUsuario"}
@@ -71,7 +61,6 @@ export default function Cadastro() {
               register={register}
               error={errors.nomeUsuario && "Campo obrigatório"}
             />
-
             <Input
               id="email"
               name={"email"}
@@ -81,11 +70,11 @@ export default function Cadastro() {
               error={errors.email && "Campo obrigatório"}
             />
 
-            <div>
-              <button type="submit">Cadastrar</button>
-            </div>
-          </fieldset>
-        </form>
+            <Button type="submit">
+              Cadastrar
+            </Button>
+          </form>
+        </LayoutForm>
       </div>
     </main>
   );
