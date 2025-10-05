@@ -44,36 +44,45 @@ export default function Login() {
 
 
   return (
-    <main>
-      <div>
+    <main
+      className="
+        bg-log-cad bg-cover bg-center bg-no-repeat
+        min-h-dvh w-full relative
+        flex items-center justify-center
+        px-4 py-6
+        sm:px-6 sm:py-8
+        md:px-8 md:py-10
+      "
+    >
+      <div className="container-login">
         <LayoutForm title="Login">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          id="nomeUsuario"
-          name="nomeUsuario"
-          label="Nome de Usuário"
-          placeholder="Digite seu nome de usuário"
-          register={register}
-          error={errors.nomeUsuario?.message}
-        />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              id="nomeUsuario"
+              name="nomeUsuario"
+              label="Nome de Usuário"
+              placeholder="Digite seu nome de usuário"
+              register={register}
+              error={errors.nomeUsuario?.message}
+            />
 
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          label="E-mail"
-          placeholder="Digite seu e-mail"
-          register={register}
-          error={errors.email?.message}
-        />
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              label="E-mail"
+              placeholder="Digite seu e-mail"
+              register={register}
+              error={errors.email?.message}
+            />
 
-        <Button type="submit" isLoading={isSubmitting} loadingText="Entrando...">
-          Entrar
-        </Button>
-      </form>
-    </LayoutForm>
+            <Button type="submit" isLoading={isSubmitting} loadingText="Entrando...">
+              Entrar
+            </Button>
+          </form>
+        </LayoutForm>
       </div>
     </main>
-    
+
   );
 }

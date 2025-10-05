@@ -39,7 +39,16 @@ export default function Cadastro() {
   });
 
   return (
-    <main>
+    <main
+      className="
+        bg-log-cad bg-cover bg-center bg-no-repeat
+        min-h-dvh w-full relative
+        flex items-center justify-center
+        px-4 py-6
+        sm:px-6 sm:py-8
+        md:px-8 md:py-10
+      "
+    >
       <div>
         <h1>Cadastro de Usuário</h1>
 
