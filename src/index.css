@@ -4,7 +4,7 @@
 @layer utilities {
   .bg-log-cad {
     background-image:
-      url('/src/img/bg.png'),
+      url('/img/bg.png'),
       radial-gradient(
         1200px 800px at 50% 20%,
         #133d77 0%,
