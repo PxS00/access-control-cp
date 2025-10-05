@@ -17,7 +17,24 @@ export default function Cadastro() {
   });
 
   const onSubmit = handleSubmit(async (data: IUserFormValues) => {
-    console.log("Dados enviados:", data);
+    try {
+      const resposta = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!resposta.ok) {
+        throw new Error("Erro ao salvar usuário");
+      }
+
+      alert("Usuário cadastrado com sucesso!");
+    } catch (e) {
+      console.error("Erro:", e);
+      alert("Erro ao salvar usuário.");
+    }
   });
 
   return (
