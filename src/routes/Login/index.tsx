@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { LayoutForm } from "../../components/Form/LayoutForm";
 import Input from "../../components/Form/Input";
 import type { IUserFormValues } from "../../types/inputProps";
+import { Button } from "../../components/Form/Button";
 
 type LoginData = IUserFormValues & { senha: string }; // 👈 adiciona o campo senha
 
@@ -31,7 +32,9 @@ export default function Login() {
           placeholder="Digite sua senha"
           register={register as any}
         />
-
+        <Button type="submit" isLoading={isSubmitting} loadingText="Entrando...">
+          Entrar
+        </Button>
       
       </form>
     </LayoutForm>
