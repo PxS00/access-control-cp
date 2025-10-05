@@ -1,17 +1,11 @@
-import type { UseFormRegister } from "react-hook-form";
+import type { FieldValues, Path, UseFormRegister } from "react-hook-form";
 
-export interface IUserFormValues {
-  nome?: string;
-  nomeUsuario: string;
-  email: string;
-}
-
-export type InputProps = {
+export type InputProps<T extends FieldValues = FieldValues> = {
   id: string;
-  name: keyof IUserFormValues;
+  name: Path<T>;
   label: string;
   type?: string;
   placeholder?: string;
-  register: UseFormRegister<IUserFormValues>;
+  register: UseFormRegister<T>;
   error?: string;
 };
