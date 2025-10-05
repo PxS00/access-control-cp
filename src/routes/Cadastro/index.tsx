@@ -40,7 +40,7 @@ export default function Cadastro() {
 
   return (
     <main>
-      <div style={{ width: "40%", margin: "0 auto" }}>
+      <div>
         <h1>Cadastro de Usuário</h1>
 
         <form onSubmit={onSubmit}>

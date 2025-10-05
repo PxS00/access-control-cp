@@ -45,7 +45,7 @@ export default function Login() {
 
   return (
     <main>
-      <div style={{ width: "40%", margin: "0 auto" }}>
+      <div>
         <LayoutForm title="Login">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input
