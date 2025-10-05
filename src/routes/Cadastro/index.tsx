@@ -31,6 +31,7 @@ export default function Cadastro() {
       }
 
       alert("Usuário cadastrado com sucesso!");
+      navigate("/");
     } catch (e) {
       console.error("Erro:", e);
       alert("Erro ao salvar usuário.");
