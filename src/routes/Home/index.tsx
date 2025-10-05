@@ -1,3 +1,5 @@
+import { FaHandSpock } from "react-icons/fa6";
+
 export default function Home() {
   const usuario = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
 
@@ -7,7 +9,7 @@ export default function Home() {
       {usuario && (
         <div>
           <p>
-            Bem-vindo, <b>{usuario.nomeUsuario}</b>!
+            Bem-vindo, <b>{usuario.nomeUsuario} <FaHandSpock /></b>!
           </p>
         </div>
       )}

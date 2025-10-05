@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IoIosLogOut } from "react-icons/io";
 import type { CadastroSchema } from '../../types/schema';
 
 export default function Header() {
@@ -45,7 +46,7 @@ export default function Header() {
           <p>
             Email: <strong>{usuario.email}</strong>
           </p>
-          <button onClick={logout}>Sair</button>
+          <button onClick={logout}> <IoIosLogOut /> </button>
         </div>
       )}
     </header>
