@@ -1,7 +1,16 @@
 export default function Home() {
-    return(
+  const usuario = JSON.parse(localStorage.getItem("usuarioLogado") || "null");
+
+  return (
+    <div>
+      <h1>Home</h1>
+      {usuario && (
         <div>
-            <h1>Home</h1>
+          <p>
+            Bem-vindo, <b>{usuario.nomeUsuario}</b>!
+          </p>
         </div>
-    );
+      )}
+    </div>
+  );
 }
