@@ -1,0 +1,12 @@
+# Build e dependências
+dist/
+node_modules/
+
+# Lock files
+pnpm-lock.yaml
+
+# Database
+db.json
+
+# Env
+.env
