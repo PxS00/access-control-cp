@@ -10,6 +10,8 @@ import {
   type LoginSchema,
 } from '../../types/schema';
 
+const API_URL = import.meta.env.VITE_API_URL as string;
+
 export default function Login() {
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ export default function Login() {
 
   async function onSubmit(data: LoginSchema) {
     try {
-      const res = await fetch('http://localhost:3001/usuarios');
+      const res = await fetch(API_URL);
       const usuarios: CadastroSchema[] = await res.json();
       const usuarioValido = usuarios.find(
         u => u.nomeUsuario === data.nomeUsuario && u.email === data.email
