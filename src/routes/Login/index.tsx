@@ -1,28 +1,35 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { LayoutForm } from "../../components/Form/LayoutForm";
-import Input from "../../components/Form/Input";
-import type { IUserFormValues } from "../../types/inputProps";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components/Form/Button";
+import Input from "../../components/Form/Input";
+import { LayoutForm } from "../../components/Form/LayoutForm";
+import {
+  loginSchema,
+  type CadastroSchema,
+  type LoginSchema,
+} from "../../types/schema";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
     setError,
-  } = useForm<IUserFormValues>({ mode: "onBlur" });
+  } = useForm<LoginSchema>({
+    mode: "onChange",
+    resolver: zodResolver(loginSchema),
+  });
 
-  async function onSubmit(data: IUserFormValues) {
+  async function onSubmit(data: LoginSchema) {
     try {
-      const response = await fetch("/db.json");
-      const jsonData = await response.json();
-      const usuarios = jsonData.usuarios;
-
+      const res = await fetch("http://localhost:3001/usuarios");
+      const usuarios: CadastroSchema[] = await res.json();
       const usuarioValido = usuarios.find(
-        (u: IUserFormValues) =>
-          u.nomeUsuario === data.nomeUsuario && u.email === data.email
+        (u) => u.nomeUsuario === data.nomeUsuario && u.email === data.email
       );
-
       if (!usuarioValido) {
         setError("email", {
           type: "manual",
@@ -30,18 +37,16 @@ export default function Login() {
         });
         return;
       }
-
-      alert(`Bem-vindo, ${usuarioValido.nome}!`);
-      console.log("Login bem-sucedido:", usuarioValido);
-    } catch (error) {
-      console.error("Erro ao verificar login:", error);
+      localStorage.setItem("usuarioLogado", JSON.stringify(usuarioValido));
+      window.dispatchEvent(new Event("userChanged"));
+      navigate("/home");
+    } catch {
       setError("email", {
         type: "manual",
         message: "Erro ao acessar os dados do servidor.",
       });
     }
   }
-
 
   return (
 <main className="bg-log-cad page-login">
@@ -57,7 +62,6 @@ export default function Login() {
               register={register}
               error={errors.nomeUsuario?.message}
             />
-
             <Input
               id="email"
               name="email"
@@ -67,17 +71,21 @@ export default function Login() {
               register={register}
               error={errors.email?.message}
             />
-            <Button type="submit" isLoading={isSubmitting} loadingText="Entrando...">
+            <Button
+              type="submit"
+              isLoading={isSubmitting}
+              disabled={!isValid || isSubmitting}
+              loadingText="Entrando..."
+            >
               Entrar
             </Button>
-            
-            <Button type="submit">
-              Quero me cadastrar
-            </Button>
           </form>
+          <div>
+            <span>Não tem uma conta? </span>
+            <Link to="/cadastro">Cadastre-se</Link>
+          </div>
         </LayoutForm>
       </div>
     </main>
-
   );
 }
