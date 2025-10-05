@@ -12,6 +12,36 @@ export default function Login() {
     setError,
   } = useForm<IUserFormValues>({ mode: "onBlur" });
 
+  async function onSubmit(data: IUserFormValues) {
+    try {
+      const response = await fetch("/db.json");
+      const jsonData = await response.json();
+      const usuarios = jsonData.usuarios;
+
+      const usuarioValido = usuarios.find(
+        (u: IUserFormValues) =>
+          u.nomeUsuario === data.nomeUsuario && u.email === data.email
+      );
+
+      if (!usuarioValido) {
+        setError("email", {
+          type: "manual",
+          message: "Usuário ou e-mail inválido",
+        });
+        return;
+      }
+
+      alert(`Bem-vindo, ${usuarioValido.nome}!`);
+      console.log("Login bem-sucedido:", usuarioValido);
+    } catch (error) {
+      console.error("Erro ao verificar login:", error);
+      setError("email", {
+        type: "manual",
+        message: "Erro ao acessar os dados do servidor.",
+      });
+    }
+  }
+
 
   return (
     <LayoutForm title="Login">
