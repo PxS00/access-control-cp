@@ -81,3 +81,20 @@
            hover:brightness-110 active:brightness-95
            disabled:opacity-60 px-4 py-3;
 }
+
+  /* ERRO */
+  .form-card :where(input, select, textarea)[aria-invalid="true"] {
+    @apply border-red-600 ring-2 ring-red-500;
+    background-color: transparent;
+    color: #ffecec;
+  }
+  .form-card :where(input, select, textarea)[aria-invalid="true"]::placeholder {
+    color: #D68C8CF2;
+  }
+
+  .form-card .error,
+  .form-card .error-message,
+  .form-card small.error {
+    @apply text-red-300 text-xs mt-1;
+  }
+

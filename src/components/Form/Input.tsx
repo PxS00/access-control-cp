@@ -10,16 +10,27 @@ export default function Input<T extends FieldValues = FieldValues>({
   register,
   error,
 }: InputProps<T>) {
+  const inputId = id ?? String(name);          
+  const errorId = `${inputId}-error`;
+
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
+      {label && <label htmlFor={inputId}>{label}</label>}
+
       <input
-        id={id}
+        id={inputId}
         type={type}
         placeholder={placeholder}
         {...register(name)}
+        aria-invalid={Boolean(error)}             
+        aria-describedby={error ? errorId : undefined}
       />
-      {error && <small>{error}</small>}
+
+      {error && (
+        <small id={errorId} className="error" role="alert">
+          {error}
+        </small>
+      )}
     </div>
   );
 }

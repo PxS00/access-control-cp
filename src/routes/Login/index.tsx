@@ -16,7 +16,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm<LoginSchema>({
     mode: 'onChange',
@@ -73,7 +73,7 @@ export default function Login() {
             <Button
               type="submit"
               isLoading={isSubmitting}
-              disabled={!isValid || isSubmitting}
+              disabled={isSubmitting}
               loadingText="Entrando..."
             >
               Entrar
