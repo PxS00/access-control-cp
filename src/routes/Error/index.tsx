@@ -1,4 +1,5 @@
-import { TbError404 } from "react-icons/tb";
+import { TbError404 } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
 
 export default function Error404() {
   return (
@@ -16,13 +17,14 @@ export default function Error404() {
         <p className="error-text">
           O link pode estar incorreto ou a página foi removida.
         </p>
-          <p className="error-text">
-          Verifique o endereço
-          ou vá para a página inicial.
+        <p className="error-text">
+          Verifique o endereço ou vá para a página inicial.
         </p>
 
         <div className="error-actions">
-          <a href="/" className="btn btn-primary">Ir para a Home</a>
+          <Link to="/" className="btn btn-primary">
+            Ir para a Home
+          </Link>
         </div>
       </section>
     </main>
