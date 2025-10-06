@@ -1,10 +1,30 @@
 import { TbError404 } from "react-icons/tb";
 
-export default function Error() {
+export default function Error404() {
   return (
-    <div>
-      <TbError404 />
-      <h1>Erro 404: Página não encontrada.</h1>
-    </div>
+    <main className="page-error" aria-labelledby="error-title">
+      <section className="error-card">
+        <div className="error-header">
+          <div className="error-icon" aria-hidden>
+            <TbError404 />
+          </div>
+          <h1 id="error-title" className="error-title">
+            Página não encontrada
+          </h1>
+        </div>
+
+        <p className="error-text">
+          O link pode estar incorreto ou a página foi removida.
+        </p>
+          <p className="error-text">
+          Verifique o endereço
+          ou vá para a página inicial.
+        </p>
+
+        <div className="error-actions">
+          <a href="/" className="btn btn-primary">Ir para a Home</a>
+        </div>
+      </section>
+    </main>
   );
 }
