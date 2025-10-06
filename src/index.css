@@ -1,93 +1,55 @@
 @import 'tailwindcss';
 
-/* FUNDO */
 @layer utilities {
   .bg-log-cad {
     background-image:
       url('/img/bg.png'),
-      radial-gradient(
-        1200px 800px at 50% 20%,
-        #133d77 0%,
-        #0a2a52 45%,
-        #081a3a 100%
-      );
+      radial-gradient(1200px 800px at 50% 20%, #133d77 0%, #0a2a52 45%, #081a3a 100%);
     background-repeat: no-repeat, no-repeat;
     background-position: center, center;
     background-size: cover, cover;
     box-shadow: inset 0 0 0 9999px rgba(8, 26, 58, 0.04);
   }
+
   .page-login {
-    @apply min-h-dvh w-full relative
-           flex items-center justify-center
-           px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10;
+    @apply min-h-dvh w-full relative flex items-center justify-center px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10;
+  }
+
+  .page-error {
+    @apply min-h-dvh w-full flex items-center justify-center px-4 py-10 bg-[#eaf6ff];
+  }
+
+  .page-home {
+    @apply min-h-dvh;
+    background-image: radial-gradient(1000px 600px at 50% -10%, #eaf6ff 0%, #f7fbff 60%, #ffffff 100%);
   }
 }
 
-/* CARD */
 @layer components {
   .layout-form {
     @apply relative z-10 w-full max-w-[560px] sm:max-w-[600px] mx-auto;
   }
 
   .form-card {
-    @apply rounded-3xl p-6 sm:p-8 md:p-10 text-white
-         bg-white/8 backdrop-blur-lg backdrop-saturate-150
-         border border-white/20
-         shadow-[0_24px_72px_rgba(0,0,0,0.48)];
-    background-image: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1),
-      rgba(255, 255, 255, 0.03)
-    );
+    @apply rounded-3xl p-6 sm:p-8 md:p-10 text-white bg-white/8 backdrop-blur-lg backdrop-saturate-150 border border-white/20 shadow-[0_24px_72px_rgba(0,0,0,0.48)];
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
     background-blend-mode: overlay;
-  }
-
-  .form-card :where(input, select, textarea) {
-    @apply w-full rounded-xl bg-white/15 text-white placeholder-white/80
-         border border-white/30 px-4 py-3 outline-none
-         focus:border-white/60 focus:ring-2 focus:ring-white/25;
   }
 
   .form-card h1 {
     @apply text-center font-semibold text-xl sm:text-2xl mb-6;
   }
 
-  .form-card form > * + * {
-    margin-top: 1rem;
+  .form-card :where(input, select, textarea) {
+    @apply w-full rounded-xl bg-transparent text-white placeholder-white/70 border border-white/30 px-4 py-3 outline-none focus:border-white/60 focus:ring-2 focus:ring-white/25;
   }
-  @media (min-width: 640px) {
-    .form-card form > * + * {
-      margin-top: 1.25rem;
-    }
-  }
-  @media (min-width: 768px) {
-    .form-card form > * + * {
-      margin-top: 1.5rem;
-    }
-  }
-}
 
-/* INPUTS  */
-.form-card :where(input[type='text'], input[type='email'], select, textarea) {
-  @apply w-full rounded-xl bg-transparent text-white placeholder-white/70
-           border border-white/30 px-4 py-3 outline-none
-           focus:border-white/60 focus:ring-2 focus:ring-white/25;
-}
-/* BOTÃO */
-.form-card button[type='submit'] {
-  @apply w-full rounded-xl font-semibold
-           bg-gradient-to-r from-[#64c7ff] to-[#8ed0ff]
-           text-[#0a2240] shadow-lg
-           hover:brightness-110 active:brightness-95
-           disabled:opacity-60 px-4 py-3;
-}
-
-  /* ERRO */
   .form-card :where(input, select, textarea)[aria-invalid="true"] {
     @apply border-red-600 ring-2 ring-red-500;
     background-color: transparent;
     color: #ffecec;
   }
+
   .form-card :where(input, select, textarea)[aria-invalid="true"]::placeholder {
     color: #D68C8CF2;
   }
@@ -98,3 +60,56 @@
     @apply text-red-300 text-xs mt-1;
   }
 
+  .form-card button[type='submit'] {
+    @apply w-full rounded-xl font-semibold px-4 py-3 bg-gradient-to-r from-[#64c7ff] to-[#8ed0ff] text-[#0a2240] shadow-lg hover:brightness-110 active:brightness-95 disabled:opacity-60;
+  }
+
+  .error-card { @apply w-full max-w-2xl rounded-[1.25rem] p-6 border border-slate-200 bg-white; }
+.error-header { @apply flex flex-col items-center gap-2; }
+.error-icon svg { @apply size-30 text-black; }
+  .error-title { @apply text-2xl font-bold; }
+  .error-text { @apply text-center mt-3 text-slate-600; }
+  .error-actions { @apply mt-4 flex gap-3 justify-center; }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-medium no-underline border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300;
+  }
+
+  .btn-primary { @apply bg-sky-500 text-white hover:brightness-110 active:translate-y-px; }
+  .btn-ghost { @apply bg-slate-100 text-slate-700 hover:bg-slate-200; }
+
+  .home-wrap { @apply mx-auto max-w-4xl px-4 py-10; }
+  .home-title { @apply text-2xl sm:text-3xl font-bold text-slate-800; }
+
+  .home-card {
+    @apply mt-6 rounded-2xl border border-slate-200/70 bg-white/80 backdrop-blur shadow-[0_10px_30px_rgba(2,6,23,0.06)] px-5 py-6 flex items-center gap-4 transition-transform duration-200;
+  }
+
+  .home-card:hover { @apply -translate-y-0.5; }
+
+  .home-icon { @apply grid size-12 place-items-center rounded-xl bg-sky-100 text-sky-600 text-xl font-semibold shrink-0; }
+  .home-icon svg { @apply size-7; }
+  .home-text { @apply text-slate-700 text-base sm:text-lg; }
+  .home-username { @apply font-semibold text-slate-900; }
+  .home-actions { @apply ml-auto flex items-center gap-2; }
+
+  .home-grid { @apply mt-6 grid gap-4 sm:grid-cols-2; }
+  .home-tile { @apply rounded-xl border border-slate-200/70 bg-white/80 backdrop-blur p-5 shadow-[0_6px_18px_rgba(2,6,23,0.05)] hover:-translate-y-0.5 transition-transform; }
+  .home-tile-title { @apply font-semibold text-slate-800; }
+  .home-tile-desc { @apply text-sm text-slate-600 mt-1; }
+
+  .app-header { @apply w-full bg-white/80 backdrop-blur border-b border-slate-200; }
+  .header-wrap { @apply mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4; }
+  .header-title { @apply text-lg sm:text-xl font-semibold text-slate-800; }
+  .header-user { @apply ml-auto flex items-center gap-3 sm:gap-4; }
+  .header-avatar { @apply grid place-items-center size-10 sm:size-11 rounded-xl bg-sky-100 text-sky-700 font-semibold select-none; }
+  .header-info { @apply hidden sm:block leading-tight; }
+  .header-greet { @apply text-slate-700 text-sm; }
+  .header-name { @apply text-slate-900; }
+  .header-mail { @apply text-slate-500 text-xs; }
+  .header-actions { @apply flex items-center gap-2; }
+}
+
+.form-card form > * + * { margin-top: 1rem; }
+@media (min-width: 640px) { .form-card form > * + * { margin-top: 1.25rem; } }
+@media (min-width: 768px) { .form-card form > * + * { margin-top: 1.5rem; } }
