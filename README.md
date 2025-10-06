@@ -29,7 +29,7 @@ Sistema de Controle de Acesso desenvolvido com React e TypeScript, implementando
 
 ## 🎯 Principais Funcionalidades
 
-- **� Sistema de Cadastro**: Registro de novos usuários com validação completa
+- **⚙️Sistema de Cadastro**: Registro de novos usuários com validação completa
   - Validação de nome (3-100 caracteres, apenas letras)
   - Username único (3-20 caracteres, alfanumérico)
   - Email com validação Zod v4 (normalização automática)
